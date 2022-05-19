@@ -2,6 +2,8 @@
 Demo code and data for modeling dispersion in light transport through MMF
 
 This is a 1m-long 50um-core 0.22NA step-index MMF operated within 1510 - 1630 nm.
+dataset:
+https://www.dropbox.com/sh/ac3hjfhg4g614vc/AAC8Wf43KcMpDBnUpoLb1Afga?dl=0
 
 1. main_demo.m fits and validates the dispersion model of the MMF up to K=2 order.
 2. PM_demo.m computes the spectral-variant principal modes (PMs) using a fitted dispersion model.
