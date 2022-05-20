@@ -25,16 +25,7 @@ addpath('tool functions')
 n_dof = size(Mo,1);
 n_f = size(Mn,3);
 msTM_1.TMs = msTM_phase_align(msTM_1.TMs); % align the relative phase offset between consecutive TMs
-
-temp1 = zeros(n_dof);
-temp2 = zeros(n_dof);
-for ii = 1:numel(msTM_1.w)-1
-    temp1 = temp1 + msTM_1.TMs(:,:,ii+1)*msTM_1.TMs(:,:,ii)';
-    temp2 = temp2 + msTM_1.TMs(:,:,ii)*msTM_1.TMs(:,:,ii)';
-end
-temp = temp1/temp2;
-D = sqrtm(temp*temp')\temp; % force D to be unitary
-D2 = D_from_msTM(msTM_1.TMs);
+D = D_from_msTM(msTM_1.TMs);
 X1_est = logm(D)/msTM_1.dw;
 
 %% examine spectral correlation after compensating linear dispersion with X1_est
