@@ -1,3 +1,6 @@
+%% add tool functions
+addpath('tool functions')
+
 %% load the multispectral TM (msTM) for model construction
 
 % The MMF has 1 m in length, -index, 0.22 NA, and 50 um core diameter.
@@ -22,16 +25,7 @@ addpath('tool functions')
 n_dof = size(Mo,1);
 n_f = size(Mn,3);
 msTM_1.TMs = msTM_phase_align(msTM_1.TMs); % align the relative phase offset between consecutive TMs
-
-temp1 = zeros(n_dof);
-temp2 = zeros(n_dof);
-for ii = 1:numel(msTM_1.w)-1
-    temp1 = temp1 + msTM_1.TMs(:,:,ii+1)*msTM_1.TMs(:,:,ii)';
-    temp2 = temp2 + msTM_1.TMs(:,:,ii)*msTM_1.TMs(:,:,ii)';
-end
-temp = temp1/temp2;
-D = sqrtm(temp*temp')\temp; % force D to be unitary
-    
+D = D_from_msTM(msTM_1.TMs);
 X1_est = logm(D)/msTM_1.dw;
 
 %% examine spectral correlation after compensating linear dispersion with X1_est
@@ -67,7 +61,6 @@ step = 1e-8;
 
 %% examine spectral correlation after compensating high-order dispersion
 
-close all
 figure
 subplot(2,2,1)
 imagesc(abs(C_trace))
@@ -128,13 +121,12 @@ for ii = 1:n_f
     M_hat(:,:,ii) = D * M_test(:,:,ref_idx);
     C_X3(ii) = TM_correlation(M_test(:,:,ii), M_hat(:,:,ii));
     
-    ii
+    fprintf('correlation %d/%d\n', ii, n_f)
 end
 
 
 %% plot the TM spectral correlation vs. freq. and wavelength
-close all
-figure('Position', [100, 100, 800, 400])
+figure('Position', [100, 100, 800, 500])
 temp = [C_original(:,ref_idx), C_X1_est.', C_X1.', C_X2.', C_X3.'];
 
 plot(w_test+wo, temp'); hold on

@@ -30,7 +30,8 @@ D = U*expm( X_from_Xk(Xk,dw) )*U';
 spectral_phase = -0.39;
 D = HV_delay_correction(D, spectral_phase);
 %----------------%
-[E, eig_val] = eig_first_N(D, n_dof);
+[E, diag_eig_val] = eigs(D, n_dof);
+eig_val = diag(diag_eig_val);
 [~, I] = sort(angle(eig_val), 'descend'); % sort meaningful the eigen modes by arrival times
 E = E(:,I);
 
