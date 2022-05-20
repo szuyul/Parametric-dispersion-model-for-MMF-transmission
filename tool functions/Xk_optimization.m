@@ -8,7 +8,6 @@ function [Xk, C_trace, loss, step] = Xk_optimization(Mn, Mo, w, Xk, max_iter, st
 %
 %
 %
-
 n_dof = size(Xk,1);
 dispersion_order = size(Xk,3);
 n_f = numel(w);
@@ -51,7 +50,7 @@ while (ii < max_iter)
             gradmean(:,:,order) = mean(fullgrad.*shiftdim(w.^order,-1),3);
         end
         
-        sprintf('%d th Xk update, loss = %f, step = %f', tt, loss_temp, step)
+        fprintf('%d th Xk update, loss = %.8g, step = %.4g \n', tt, loss_temp, step)
         Xk = Xk_temp;
         C_trace(tt,:) = C_temp;
         loss(tt) = loss_temp;
@@ -65,7 +64,7 @@ while (ii < max_iter)
     % update Xk
     Xk_temp = Xk - step*gradmean;
     
-    sprintf('%d th iteration, loss = %f', ii, loss(tt-1))
+    fprintf('%d th iteration, loss = %.8g, step = %.4g \n', ii, loss(tt-1), step)
     ii = ii+1;
 end    
 

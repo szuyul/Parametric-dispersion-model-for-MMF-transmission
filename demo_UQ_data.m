@@ -1,3 +1,6 @@
+%% add tool functions
+addpath('tool functions')
+
 %% load the multispectral TM (msTM) for model construction
 
 % The MMF has 1 m in length, -index, 0.22 NA, and 50 um core diameter.
@@ -31,7 +34,7 @@ for ii = 1:numel(msTM_1.w)-1
 end
 temp = temp1/temp2;
 D = sqrtm(temp*temp')\temp; % force D to be unitary
-    
+D2 = D_from_msTM(msTM_1.TMs);
 X1_est = logm(D)/msTM_1.dw;
 
 %% examine spectral correlation after compensating linear dispersion with X1_est

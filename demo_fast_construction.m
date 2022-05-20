@@ -1,3 +1,6 @@
+%% add tool functions
+addpath('tool functions')
+
 %% load the multispectral TM (msTM) for fast model construction
 
 % The MMF has 1 m in length, step-index, 0.22 NA, and 50 um core diameter.
