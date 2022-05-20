@@ -64,7 +64,7 @@ while (ii < max_iter)
     % update Xk
     Xk_temp = Xk - step*gradmean;
     
-    fprintf('iteration %d, loss = %.8g, step = %.4g \n', ii, loss(tt-1), step)
+    fprintf('iteration %d/%d, loss = %.8g, step = %.4g \n', ii, max_iter, loss(tt-1), step)
     ii = ii+1;
 end    
 
