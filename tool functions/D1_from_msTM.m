@@ -1,11 +1,11 @@
 function D1 = D1_from_msTM(Mn)
-% D_from_msTM calculates the D matrix from a msTM with constant spectral sampling rate 
+% D1_from_msTM calculates the estimated D1 matrix from a msTM with constant spectral sampling rate 
 % 
 % output:
 %   Mn is the input msTM
 % 
 % input: 
-%   D is the linear dispersion matrix
+%   D1 is the estimated linear dispersion matrix
 %
 
 Nw = size(Mn,3);
@@ -17,7 +17,6 @@ for ll = 1:Nw-1
     temp2 = temp2 + Mn(:,:,ll)*Mn(:,:,ll)';
 end
 temp = temp1/temp2;
-
-D1 = sqrtm(temp*temp')\temp; % force D to be unitary
+D1 = sqrtm(temp*temp')\temp;
 
 end
