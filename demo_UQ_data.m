@@ -70,7 +70,6 @@ step = 1e-8;
 
 %% examine spectral correlation after compensating high-order dispersion
 
-close all
 figure
 subplot(2,2,1)
 imagesc(abs(C_trace))
@@ -131,13 +130,12 @@ for ii = 1:n_f
     M_hat(:,:,ii) = D * M_test(:,:,ref_idx);
     C_X3(ii) = TM_correlation(M_test(:,:,ii), M_hat(:,:,ii));
     
-    ii
+    fprintf('correlation %d/%d\n', ii, n_f)
 end
 
 
 %% plot the TM spectral correlation vs. freq. and wavelength
-close all
-figure('Position', [100, 100, 800, 400])
+figure('Position', [100, 100, 800, 500])
 temp = [C_original(:,ref_idx), C_X1_est.', C_X1.', C_X2.', C_X3.'];
 
 plot(w_test+wo, temp'); hold on

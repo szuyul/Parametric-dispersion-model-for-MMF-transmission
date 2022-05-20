@@ -24,7 +24,7 @@ Xk_temp = Xk;
 
 ii = 1;
 while (ii < max_iter) 
-%% evaluate current loss
+    % evaluate current loss
     for jj = 1:n_f
         X_j(:,:,jj) = X_from_Xk(Xk_temp, w(jj));
         D_j(:,:,jj) = expm(X_j(:,:,jj));
@@ -33,7 +33,7 @@ while (ii < max_iter)
     end
     loss_temp = sum(1-abs(C_temp).^2);
     
-%% update Xk and metrics
+    % update Xk and metrics
     if (ii==1) || ( loss_temp <= loss(tt-1) )
         % calculate current gradient
         for jj = 1:n_f
@@ -50,7 +50,7 @@ while (ii < max_iter)
             gradmean(:,:,order) = mean(fullgrad.*shiftdim(w.^order,-1),3);
         end
         
-        fprintf('%d th Xk update, loss = %.8g, step = %.4g \n', tt, loss_temp, step)
+        fprintf('\nXk update %d, loss = %.8g, step = %.4g \n', tt, loss_temp, step)
         Xk = Xk_temp;
         C_trace(tt,:) = C_temp;
         loss(tt) = loss_temp;
@@ -64,7 +64,7 @@ while (ii < max_iter)
     % update Xk
     Xk_temp = Xk - step*gradmean;
     
-    fprintf('%d th iteration, loss = %.8g, step = %.4g \n', ii, loss(tt-1), step)
+    fprintf('iteration %d, loss = %.8g, step = %.4g \n', ii, loss(tt-1), step)
     ii = ii+1;
 end    
 
