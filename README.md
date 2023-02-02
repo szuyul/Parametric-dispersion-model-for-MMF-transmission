@@ -1,6 +1,7 @@
 # Parametric-dispersion-model-for-MMF-transmission
-Demo code and data for modeling dispersion in light transport through MMF
-This work is published on [Light:Science and Applications 12, 31, 2023](https://www.nature.com/articles/s41377-022-01061-7#Abs1), entitled: Efficient dispersion modeling in optical multimode fiber.
+Demo code and data for modeling dispersion in light transport through MMF.
+
+This work is published on [Light:Science and Applications 12, 31, 2023](https://www.nature.com/articles/s41377-022-01061-7#Abs1), entitled: Efficient dispersion modeling in optical multimode fiber. Please cite the paper if you use the code for your own publications.
 
 1. demo_main.m fits and validates the dispersion model of the MMF up to K=2 order (Figure 2 in results). The optimization ran in ~8 min.
 2. demo_PM.m computes the spectral-variant principal modes (PMs) using a previously fitted dispersion model (Figure 3 in results).
